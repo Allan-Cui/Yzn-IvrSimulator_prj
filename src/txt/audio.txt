@@ -1,0 +1,20 @@
+MRCP/2.0 00000000 RECOGNIZE ###
+Channel-Identifier: *@speechrecog
+Vendor-Specific-Parameters: Recognition-Mode=normal
+Speech-complete-Timeout: 1000
+Confidence-Threshold: 0.0
+Sensitivity-Level: 10
+No-Input-Timeout: 10000
+Recognition-Timeout: 10000
+Speech-Incomplete-Timeout: 500
+Start-Input-Timers: true
+Cancel-If-Queue: false
+Content-Type: text/uri-list
+Content-Length: *
+
+session:request1@form-level.store
+--------------------------------------------------------------------------
+----send
+----play $$$AUDIO$$$
+----wait -
+--------------------------------------------------------------------------
