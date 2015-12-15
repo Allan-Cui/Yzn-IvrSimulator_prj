@@ -1,0 +1,20 @@
+MRCP/2.0 00000000 RECOGNIZE ###
+Channel-Identifier: $$$Channel-Identifier$$$
+Vendor-Specific-Parameters: $$$Vendor-Specific-Parameters$$$
+Speech-complete-Timeout: $$$Speech-complete-Timeout$$$
+Confidence-Threshold: $$$Confidence-Threshold$$$
+Sensitivity-Level: $$$Sensitivity-Level$$$
+No-Input-Timeout: $$$No-Input-Timeout$$$
+Recognition-Timeout: $$$Recognition-Timeout$$$
+Speech-Incomplete-Timeout: $$$Speech-Incomplete-Timeout$$$
+Start-Input-Timers: $$$Start-Input-Timers$$$
+Cancel-If-Queue: $$$Cancel-If-Queue$$$
+Content-Type: $$$Content-Type$$$
+Content-Length: $$$Content-Length$$$
+
+session:request1@form-level.store
+--------------------------------------------------------------------------
+----send
+----play $$$AUDIO$$$
+----wait -
+--------------------------------------------------------------------------

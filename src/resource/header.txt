@@ -1,0 +1,54 @@
+----tcp_open $$$SERVERIP$$$:571
+--------------------------------------------------------------------------
+INVITE sip:$$$SERVERIP$$$:571 SIP/2.0
+Via: SIP/2.0 $$$LOCALIP$$$:8062;rport;branch=z9hG4bK596ZZv9tXa1ra
+Max-Forwards: 70
+From: <sip:$$$LOCALIP$$$:8062>;tag=5KyB0Np8NtaFB
+To: <sip:$$$SERVERIP$$$:571>
+Call-ID: 50cd2080-9996-122d-2680-39a48cb53b8d
+CSeq: 127262509 INVITE
+Contact: <sip:$$$LOCALIP$$$:8062>
+User-Agent: TEST
+Allow: INVITE, ACK, BYE, CANCEL, OPTIONS, PRACK, MESSAGE, SUBSCRIBE, NOTIFY, REFER, UPDATE
+Supported: timer, 100rel
+Min-SE: 120
+Content-Type: application/sdp
+Content-Disposition: session
+Content-Length: *
+
+v=0
+o=TestClient 533914912052629847 1763273222311332685 IN IP4 $$$LOCALIP$$$
+s=-
+c=IN IP4 $$$LOCALIP$$$
+t=0 0
+m=application 9 TCP/MRCPv2 1
+a=setup:active
+a=connection:new
+a=resource:speechrecog
+a=cmid:1
+m=audio 8062 RTP/AVP 0 8 96 101
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:96 L16/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+a=sendonly
+a=ptime:20
+a=mid:1
+--------------------------------------------------------------------------
+----tcp_send
+--------------------------------------------------------------------------
+ACK sip:$$$SERVERIP$$$:571;transport=TCP SIP/2.0
+Via: SIP/2.0 $$$LOCALIP$$$:8062;rport;branch=z9hG4bK6j0r1QtytKQBp
+Max-Forwards: 70
+From: <sip:$$$LOCALIP$$$:8062>;tag=5KyB0Np8NtaFB
+To: <sip:$$$SERVERIP$$$:571>;tag=d8074a18
+Call-ID: 50cd2080-9996-122d-2680-39a48cb53b8d
+CSeq: 127262509 ACK
+Contact: <sip:$$$LOCALIP$$$:8062>
+Content-Length: 0
+
+--------------------------------------------------------------------------
+----tcp_send -
+----open *
+--------------------------------------------------------------------------
