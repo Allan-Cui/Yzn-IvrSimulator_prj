@@ -1,5 +1,6 @@
 package javaPackage;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,20 +12,24 @@ import java.io.InputStream;
 
 public class Callbat {
 
-      public static void  callCmd(String locationCmd){
-          try {
-          Process child = Runtime.getRuntime().exec("cmd.exe /C start "+locationCmd);
-          InputStream in = child.getInputStream();
-          while ((in.read()) != -1) {
-      }
-       in.close();
-       try {
-           child.waitFor();
-       } catch (InterruptedException e) {
-           e.printStackTrace();
-       }
-     } catch (IOException e) {
-           e.printStackTrace();
-     }
- }
- }
+	public static void  callCmd(){
+		try {
+			File directory = new File("..");
+			String dir = directory.getCanonicalPath();
+			String locationCmd = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\test.bat";
+//			String locationCmd = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\go.bat";
+			Process child = Runtime.getRuntime().exec("cmd.exe /C start "+locationCmd);
+			InputStream in = child.getInputStream();
+			while ((in.read()) != -1) {
+			}
+			in.close();
+			try {
+				child.waitFor();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

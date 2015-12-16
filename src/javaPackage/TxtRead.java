@@ -3,6 +3,7 @@ package javaPackage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
@@ -21,15 +22,23 @@ public class TxtRead {
 	 * @param filePath
 	 */
 	private static String readTxt = "";
-	final static String headerPath = "C:\\Yzn-IvrSimulator_prj\\src\\resource\\header.txt";
-	final static String gramPath = "C:\\Yzn-IvrSimulator_prj\\src\\resource\\gram.txt";
-	final static String audioPath = "C:\\Yzn-IvrSimulator_prj\\src\\resource\\audio.txt";
-	final static String footerPath = "C:\\Yzn-IvrSimulator_prj\\src\\resource\\footer.txt";
 
-	public static String readHeader(String filePath, String serverIP, String localIP){
+	private static String path(String str) throws IOException {
+		File directory = new File("..");
+		String dir = directory.getCanonicalPath();
+		String path = "\\Yzn-IvrSimulator_prj\\src\\txt";
+		return dir + path + str;
+	}
+	private static String headerTxt = "\\header.txt";
+	private static String gramTxt = "\\gram.txt";
+	private static String audioTxt = "\\audio.txt";
+	private static String footerTxt = "\\footer.txt";
+
+	public static String readHeader(String serverIP, String localIP){
 		readTxt = "";//清空txt
 		try {
 			String encoding="UTF-8";
+			String filePath = path(headerTxt);
 			File file=new File(filePath);
 			if(file.isFile() && file.exists()){ //判断文件是否存在
 				InputStreamReader read = new InputStreamReader(
@@ -52,10 +61,11 @@ public class TxtRead {
 		return readTxt;
 	}
 
-	public static String readFooter(String filePath, String serverIP, String localIP){
+	public static String readFooter(String serverIP, String localIP){
 		readTxt = "";//清空txt
 		try {
 			String encoding="UTF-8";
+			String filePath = path(footerTxt);
 			File file=new File(filePath);
 			if(file.isFile() && file.exists()){ //判断文件是否存在
 				InputStreamReader read = new InputStreamReader(
@@ -78,10 +88,11 @@ public class TxtRead {
 		return readTxt;
 	}
 
-	public static String readGram(String filePath, String Gram){
+	public static String readGram(String Gram){
 		readTxt = "";//清空txt
 		try {
 			String encoding="UTF-8";
+			String filePath = path(gramTxt);
 			File file=new File(filePath);
 			if(file.isFile() && file.exists()){ //判断文件是否存在
 				InputStreamReader read = new InputStreamReader(
@@ -103,10 +114,11 @@ public class TxtRead {
 		return readTxt;
 	}
 
-	public static String audio(String filePath){
+	public static String audio(){
 		readTxt = "";//清空txt
 		try {
 			String encoding="UTF-8";
+			String filePath = path(audioTxt);
 			File file=new File(filePath);
 			if(file.isFile() && file.exists()){ //判断文件是否存在
 				InputStreamReader read = new InputStreamReader(

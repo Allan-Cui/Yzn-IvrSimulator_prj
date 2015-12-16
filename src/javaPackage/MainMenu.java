@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -78,8 +79,13 @@ public class MainMenu implements ActionListener {
     JTextField text12 = new JTextField();
     JButton button4 = new JButton("Go");
 
-    MainMenu() {
-        jfc.setCurrentDirectory(new File("C:\\Yzn-IvrSimulator_prj\\src\\resource"));// 文件选择默认目录
+    MainMenu() throws IOException {
+
+    	File directory = new File("..");
+		String dir = directory.getCanonicalPath();
+		String location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+        jfc.setCurrentDirectory(new File(location));// 文件选择默认目录
+
         double lx = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
         double ly = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -91,7 +97,7 @@ public class MainMenu implements ActionListener {
         label1.setBounds(10, 10, 60, 20);
         text1.setBounds(75, 10, 160, 20);
         label2.setBounds(10, 35, 60, 20);
-        text2.setText("C:\\Yzn-IvrSimulator_prj\\src\\resource");
+        text2.setText(location);
         text2.setBounds(75, 35, 160, 20);
         button2.setBounds(240, 35, 50, 20);
         label3.setBounds(10, 60, 60, 20);
@@ -245,53 +251,103 @@ public class MainMenu implements ActionListener {
     			map.put("ContentType", ContentType);
     			map.put("ContentLength", ContentLength);
 
-    			check(grammar);
-    			check(audioPath);
-    			check(serverIP);
-    			check(ChannelIdentifier);
-    			check(VendorSpecificParameters);
-    			check(SpeechCompleteTimeout);
-    			check(ConfidenceThreshold);
-    			check(SensitivityLevel);
-    			check(NoInputTimeout);
-    			check(RecognitionTimeout);
-    			check(SpeechIncompleteTimeout);
-    			check(StartInputTimers);
-    			check(CancelIfQueue);
-    			check(ContentType);
-    			check(ContentLength);
-
     			Matcher matcher = pattern.matcher(text3.getText());
+    			String empty = "ヾ(ｰｰ )ｫｨｫｨ";
+    			//空白检测
+    			if(isNull(grammar)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(audioPath)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(serverIP)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
     			if(!matcher.matches()){
     				JOptionPane.showMessageDialog(null, "请输入正确IP地址", "message", 2);
     				return;
     			}
-    			String header = TxtRead.readHeader(TxtRead.headerPath, serverIP, localIP);
-    			String gram = TxtRead.readGram(TxtRead.gramPath, grammar);
-    			String footer = TxtRead.readFooter(TxtRead.footerPath, serverIP, localIP);
-    			String audio = FileFinder2.findPath(".mu", audioPath, map);
+    			if(isNull(ChannelIdentifier)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(VendorSpecificParameters)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(SpeechCompleteTimeout)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(ConfidenceThreshold)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(SensitivityLevel)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(NoInputTimeout)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(RecognitionTimeout)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(SpeechIncompleteTimeout)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(StartInputTimers)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(CancelIfQueue)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(ContentType)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			if(isNull(ContentLength)){
+    				JOptionPane.showMessageDialog(null, empty, "message", 2);
+    				return;
+    			}
+    			String fileExt = ".mu";
+    			if(FileFinder2.checkMu(fileExt, audioPath)){
+    				JOptionPane.showMessageDialog(null, "指定路径下不存在'*" + fileExt + "'文件", "message", 2);
+    				return;
+    			}
+    			String header = TxtRead.readHeader(serverIP, localIP);
+    			String gram = TxtRead.readGram(grammar);
+    			String footer = TxtRead.readFooter(serverIP, localIP);
+    			String audio = FileFinder2.findPath(fileExt, audioPath, map);
     			txt = header + gram + audio + footer;
+    			TxtWrite.writeTxt(txt);
+    			Callbat.callCmd();
     			return;
-//    			TxtWrite.writeTxt(txt);
-//    			Callbat.callCmd("C:\\Yzn-IvrSimulator_prj\\src\\resource\\test.bat");
-//    			Callbat.callCmd("C:\\Yzn-IvrSimulator_prj\\src\\resource\\go.bat");
     		}
     	} catch (UnknownHostException e1) {
     		e1.printStackTrace();
     	}
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new MainMenu();
     }
 
     /**
-     * 空白检测
-     * @param str
+     * 空白检测function
+     * @param obj
      */
-    private void check (Object obj) {
+    private boolean isNull(Object obj) {
     	if (obj.equals("")||obj == null) {
-    		JOptionPane.showMessageDialog(null, "ヾ(ｰｰ )ｫｨｫｨ", "message", 2);
-    		return;
+    		return true;
     	}
+    	return false;
     }
 }

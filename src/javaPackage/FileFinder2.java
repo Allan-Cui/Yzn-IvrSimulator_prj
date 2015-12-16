@@ -16,8 +16,7 @@ public class FileFinder2 {
 	public static String findPath(String filenameSuffix, String path, Map map){
 		File f = new File(path);
 		File[] paths=f.listFiles();
-		System.out.println(paths[0]);
-		String audio = TxtRead.audio(TxtRead.audioPath);
+		String audio = TxtRead.audio();
 		for(File p:paths)
 		{
 			if(p.getAbsolutePath().endsWith(filenameSuffix)){
@@ -39,5 +38,14 @@ public class FileFinder2 {
 		audioTxt = audioTxt.replace("$$$Content-Length$$$", map.get("ContentLength").toString());
 		//add by Yizina 2015/12/15 end
 		return audioTxt;
+	}
+
+	public static boolean checkMu (String filenameSuffix, String path) {
+		File f = new File(path);
+		File[] paths=f.listFiles();
+		if (paths.length < 1) {
+			return false;
+		}
+		return true;
 	}
 }

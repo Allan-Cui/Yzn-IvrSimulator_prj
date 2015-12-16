@@ -1,6 +1,7 @@
 package javaPackage;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -17,7 +18,9 @@ public class TxtWrite {
 	public static void writeTxt(String txt) {
 		PrintWriter writer = null;
 		try{
-			writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Yzn-IvrSimulator_prj\\src\\resource\\output.txt"), "UTF-8")));
+			File directory = new File("..");
+			String dir = directory.getCanonicalPath();
+			writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\result.txt"), "UTF-8")));
 			writer.write(txt);
 			writer.close();
 		}catch(IOException e){
