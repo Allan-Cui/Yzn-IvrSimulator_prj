@@ -43,8 +43,10 @@ public class FileFinder2 {
 	public static boolean checkMu (String filenameSuffix, String path) {
 		File f = new File(path);
 		File[] paths=f.listFiles();
-		if (paths.length < 1) {
-			return false;
+		for (File p:paths) {
+			if(p.getAbsolutePath().endsWith(filenameSuffix)){
+				return false;
+			}
 		}
 		return true;
 	}

@@ -1,5 +1,6 @@
 package javaPackage;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -16,83 +17,73 @@ import java.util.regex.Pattern;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-/**
- * @author Yizina
- * MainMenu.java
- * 2015/12/11
- */
+public class DefaultSettingMenu implements ActionListener {
 
-public class MainMenu implements ActionListener {
+	private JDialog frame;
+	private JTextField text1;
+	private JTextField text2;
+	private JTextField text3;
+	private JTextField text01;
+	private JTextField text03;
+	private JTextField text04;
+	private JTextField text05;
+	private JTextField text06;
+	private JTextField text07;
+	private JTextField text08;
+	private JTextField text11;
+	private JTextField text12;
+	JFileChooser jfc = new JFileChooser();// 文件选择器
 
 	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
-    JFrame frame = new JFrame("IvrSimulator");// 框架布局
-    JTabbedPane tabPane = new JTabbedPane();// 选项卡布局
 
-    Container main = new Container();//
-    JLabel label1 = new JLabel("Grammar");
-    JLabel label2 = new JLabel("Audio");
-    JLabel label3 = new JLabel("IP Port");
-    JTextField text1 = new JTextField();// TextField 目录的路径
-    JTextField text2 = new JTextField();// 文件的路径
-    JTextField text3 = new JTextField();// IP Port
-    JButton button2 = new JButton("...");// 选择
-    JFileChooser jfc = new JFileChooser();// 文件选择器
-    JButton button3 = new JButton("Go");//
-    JButton btnDefault = new JButton("Default");
-    JButton btnClear = new JButton("Clear");
-    JButton btnSetting = new JButton("Setting");
-    JButton btnDefaultSub = new JButton("Default");
-    JButton btnClearSub = new JButton("Clear");
-    JButton btnSettingSub = new JButton("Setting");
+	Container setting = new Container();
+	JLabel label01 = new JLabel("Grammar");
+	JLabel label02 = new JLabel("Audio");
+	JLabel label03 = new JLabel("IP Port");
+	JLabel label04 = new JLabel("Channel-Identifier");
+	JLabel label05 = new JLabel("Vendor-Specific-Parameters");
+	JLabel label06 = new JLabel("Speech-complete-Timeout");
+	JLabel label07 = new JLabel("Confidence-Threshold");
+	JLabel label08 = new JLabel("Sensitivity-Level");
+	JLabel label09 = new JLabel("No-Input-Timeout");
+	JLabel label10 = new JLabel("Recognition-Timeout");
+	JLabel label11 = new JLabel("Speech-Incomplete-Timeout");
+	JLabel label12 = new JLabel("Start-Input-Timers");
+	JLabel label13 = new JLabel("Cancel-If-Queue");
+	JLabel label14 = new JLabel("Content-Type");
+	JLabel label15 = new JLabel("Content-Length");
 
-    Container audio = new Container();
-    JLabel label01 = new JLabel("Channel-Identifier");
-    JLabel label02 = new JLabel("Vendor-Specific-Parameters");
-    JLabel label03 = new JLabel("Speech-complete-Timeout");
-    JLabel label04 = new JLabel("Confidence-Threshold");
-    JLabel label05 = new JLabel("Sensitivity-Level");
-    JLabel label06 = new JLabel("No-Input-Timeout");
-    JLabel label07 = new JLabel("Recognition-Timeout");
-    JLabel label08 = new JLabel("Speech-Incomplete-Timeout");
-    JLabel label09 = new JLabel("Start-Input-Timers");
-    JLabel label10 = new JLabel("Cancel-If-Queue");
-    JLabel label11 = new JLabel("Content-Type");
-    JLabel label12 = new JLabel("Content-Length");
-    JTextField text01 = new JTextField();
-    JComboBox combobox02 = new JComboBox(new String[]{"Recognition-Mode=hotword","Recognition-Mode=normal","Recognition-Mode=humanassistant"});
-    JTextField text03 = new JTextField();
-    JTextField text04 = new JTextField();
-    JTextField text05 = new JTextField();
-    JTextField text06 = new JTextField();
-    JTextField text07 = new JTextField();
-    JTextField text08 = new JTextField();
+	JButton btnGet = new JButton("...");
+	JButton btnSave = new JButton("Save");
+	JButton btnDefault = new JButton("Default");
+	JButton btnClear = new JButton("Clear");
+
     JRadioButton radio09 = new JRadioButton("True");
     JRadioButton radio09f = new JRadioButton("False");
     ButtonGroup group1 = new ButtonGroup();
     JRadioButton radio10 = new JRadioButton("True");
     JRadioButton radio10f = new JRadioButton("False");
     ButtonGroup group2 = new ButtonGroup();
-    JTextField text11 = new JTextField();
-    JTextField text12 = new JTextField();
-    JButton button4 = new JButton("Go");
 
-    final static String fileExt = ".mu";
-    private final JCheckBox checkBox = new JCheckBox("remember this");
-    private final JCheckBox checkBoxSub = new JCheckBox("remember this");
+	JComboBox combobox02 = new JComboBox(new String[]{"Recognition-Mode=hotword","Recognition-Mode=normal","Recognition-Mode=humanassistant"});
 
-    MainMenu() throws IOException {
+	/**
+	 * Initialize the contents of the frame.
+	 * @throws IOException
+	 */
+	DefaultSettingMenu() throws IOException {
+		frame = new JDialog();
 
-    	File directory = new File("..");
+		File directory = new File("..");
 		String dir = directory.getCanonicalPath();
 		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
 		IniEditer iniRead = new IniEditer();
@@ -117,161 +108,182 @@ public class MainMenu implements ActionListener {
 		} else {
 			location = audioIni;
 		}
-        jfc.setCurrentDirectory(new File(location));// 文件选择默认目录
+		jfc.setCurrentDirectory(new File(location));// 文件选择默认目录
 
-        double lx = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		double lx = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
         double ly = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		frame.setLocation(new Point((int) (lx / 2) + 200, (int) (ly / 2) - 200));
+		frame.setSize(450, 448);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        frame.setLocation(new Point((int) (lx / 2) - 200, (int) (ly / 2) - 200));// 设定窗口出现位置
-        frame.setSize(420, 436);// 设定窗口大小
-        frame.setContentPane(tabPane);// 设置布局
+		frame.getContentPane().add(setting, BorderLayout.CENTER);
 
-        label1.setBounds(10, 10, 60, 20);
-        text1.setText(grammarIni);
-        text1.setBounds(75, 10, 160, 20);
-        label2.setBounds(10, 35, 60, 20);
-        text2.setText(location);
-        text2.setBounds(75, 35, 160, 20);
-        button2.setBounds(240, 35, 50, 20);
-        label3.setBounds(10, 60, 60, 20);
-        text3.setText(ipPortIni);
-        text3.setBounds(75, 60, 160, 20);
-        button3.setBounds(330, 341, 60, 20);
-        button2.addActionListener(this); // 添加事件处理
-        button3.addActionListener(this); // 添加事件处理
-        btnDefault.setBounds(250, 341, 75, 20);
-        btnClear.setBounds(180, 341, 65, 20);
-        btnSetting.setBounds(10, 341, 75, 20);
-        btnDefault.addActionListener(this);
-        btnClear.addActionListener(this);
-        btnSetting.addActionListener(this);
-        checkBox.setBounds(275, 314, 115, 21);
-        checkBox.addActionListener(this);
-        main.add(checkBox);
-        main.add(label1);
-        main.add(text1);
-        main.add(label2);
-        main.add(text2);
-        main.add(button2);
-        main.add(label3);
-        main.add(text3);
-        main.add(button3);
-        main.add(btnDefault);
-        main.add(btnClear);
-        main.add(btnSetting);
+		label01.setBounds(10, 10, 60, 20);
+		setting.add(label01);
 
-        label01.setBounds(10, 10, 160, 20);
-        label02.setBounds(10, 35, 170, 20);
-        label03.setBounds(10, 60, 160, 20);
-        label04.setBounds(10, 85, 160, 20);
-        label05.setBounds(10, 110, 160, 20);
-        label06.setBounds(10, 135, 160, 20);
-        label07.setBounds(10, 160, 160, 20);
-        label08.setBounds(10, 185, 160, 20);
-        label09.setBounds(10, 210, 160, 20);
-        label10.setBounds(10, 235, 160, 20);
-        label11.setBounds(10, 260, 160, 20);
-        label12.setBounds(10, 285, 160, 20);
-        text01.setText(ChannelIdentifierIni);
-        text01.setBounds(180, 10, 160, 20);
-        if (VendorSpecificParametersIni.equals("Recognition-Mode=hotword")) {
-        	combobox02.setSelectedIndex(0);
+		text1 = new JTextField();
+		text1.setText(grammarIni);
+		text1.setBounds(180, 10, 160, 20);
+		setting.add(text1);
+
+		label02.setBounds(10, 35, 60, 20);
+		setting.add(label02);
+
+		text2 = new JTextField();
+		text2.setText(location);
+		text2.setBounds(180, 35, 160, 20);
+		setting.add(text2);
+
+		btnGet.setBounds(350, 35, 50, 20);
+		setting.add(btnGet);
+
+		label03.setBounds(10, 60, 60, 20);
+		setting.add(label03);
+
+		text3 = new JTextField();
+		text3.setText(ipPortIni);
+		text3.setBounds(180, 60, 160, 20);
+		setting.add(text3);
+
+		btnSave.setBounds(352, 383, 70, 20);
+		setting.add(btnSave);
+
+		btnDefault.setBounds(271, 383, 75, 20);
+		setting.add(btnDefault);
+
+		btnClear.setBounds(201, 383, 65, 20);
+		setting.add(btnClear);
+
+		label04.setBounds(10, 85, 160, 20);
+		setting.add(label04);
+
+		text01 = new JTextField();
+		text01.setText(ChannelIdentifierIni);
+		text01.setBounds(180, 85, 160, 20);
+		setting.add(text01);
+
+		label05.setBounds(10, 110, 170, 20);
+		setting.add(label05);
+
+		combobox02.setBounds(180, 110, 210, 20);
+		setting.add(combobox02);
+		if (VendorSpecificParametersIni.equals("Recognition-Mode=hotword")) {
+			combobox02.setSelectedIndex(0);
         } else if (VendorSpecificParametersIni.equals("Recognition-Mode=normal")) {
         	combobox02.setSelectedIndex(1);
         } else if (VendorSpecificParametersIni.equals("Recognition-Mode=humanassistant")) {
         	combobox02.setSelectedIndex(2);
         }
-        combobox02.setBounds(180, 35, 210, 20);
-        text03.setText(SpeechCompleteTimeoutIni);
-        text03.setBounds(180, 60, 160, 20);
-        text04.setText(ConfidenceThresholdIni);
-        text04.setBounds(180, 85, 160, 20);
-        text05.setText(SensitivityLevelIni);
-        text05.setBounds(180, 110, 160, 20);
-        text06.setText(NoInputTimeoutIni);
-        text06.setBounds(180, 135, 160, 20);
-        text07.setText(RecognitionTimeoutIni);
-        text07.setBounds(180, 160, 160, 20);
-        text08.setText(SpeechIncompleteTimeoutIni);
-        text08.setBounds(180, 185, 160, 20);
-        if (StartInputTimersIni.equals("true")) {
-        	radio09.setSelected(true);
+
+
+		label06.setBounds(10, 135, 160, 20);
+		setting.add(label06);
+
+		text03 = new JTextField();
+		text03.setText(SpeechCompleteTimeoutIni);
+		text03.setBounds(180, 135, 160, 20);
+		setting.add(text03);
+
+		label07.setBounds(10, 160, 160, 20);
+		setting.add(label07);
+
+		text04 = new JTextField();
+		text04.setText(ConfidenceThresholdIni);
+		text04.setBounds(180, 160, 160, 20);
+		setting.add(text04);
+
+		label08.setBounds(10, 185, 160, 20);
+		setting.add(label08);
+
+		text05 = new JTextField();
+		text05.setText(SensitivityLevelIni);
+		text05.setBounds(180, 185, 160, 20);
+		setting.add(text05);
+
+		label09.setBounds(10, 210, 160, 20);
+		setting.add(label09);
+
+		text06 = new JTextField();
+		text06.setText(NoInputTimeoutIni);
+		text06.setBounds(180, 210, 160, 20);
+		setting.add(text06);
+
+		label10.setBounds(10, 235, 160, 20);
+		setting.add(label10);
+
+		text07 = new JTextField();
+		text07.setText(RecognitionTimeoutIni);
+		text07.setBounds(180, 235, 160, 20);
+		setting.add(text07);
+
+		label11.setBounds(10, 260, 160, 20);
+		setting.add(label11);
+
+		text08 = new JTextField();
+		text08.setText(SpeechIncompleteTimeoutIni);
+		text08.setBounds(180, 260, 160, 20);
+		setting.add(text08);
+
+		label12.setBounds(10, 285, 160, 20);
+		setting.add(label12);
+
+		radio09.setBounds(180, 285, 60, 20);
+		setting.add(radio09);
+
+		radio09f.setBounds(240, 285, 60, 20);
+		setting.add(radio09f);
+
+		label13.setBounds(10, 310, 160, 20);
+		setting.add(label13);
+
+		radio10.setBounds(180, 310, 60, 20);
+		setting.add(radio10);
+
+		radio10f.setBounds(240, 310, 60, 20);
+		setting.add(radio10f);
+
+		if (StartInputTimersIni.equals("true")) {
+			radio09.setSelected(true);
         } else if (StartInputTimersIni.equals("false")) {
         	radio09f.setSelected(true);
         }
-        radio09.setBounds(180, 210, 60, 20);
-        radio09f.setBounds(240, 210, 60, 20);
         if (CancelIfQueueIni.equals("true")) {
         	radio10.setSelected(true);
         } else if (CancelIfQueueIni.equals("false")) {
         	radio10f.setSelected(true);
         }
-        radio10.setBounds(180, 235, 60, 20);
-        radio10f.setBounds(240, 235, 60, 20);
-        text11.setText(ContentTypeIni);
-        text11.setBounds(180, 260, 160, 20);
-        text12.setText(ContentLengthIni);
-        text12.setBounds(180, 285, 160, 20);
-        button4.setBounds(330, 341, 60, 20);
-        btnDefaultSub.setBounds(250, 341, 75, 20);
-        btnClearSub.setBounds(180, 341, 65, 20);
-        btnSettingSub.setBounds(10, 341, 75, 20);
-        btnDefaultSub.addActionListener(this);
-        btnClearSub.addActionListener(this);
-        btnSettingSub.addActionListener(this);
-        checkBoxSub.setBounds(275, 314, 115, 21);
-        checkBoxSub.addActionListener(this);
-        audio.add(checkBoxSub);
-        audio.add(label01);
-        audio.add(label02);
-        audio.add(label03);
-        audio.add(label04);
-        audio.add(label05);
-        audio.add(label06);
-        audio.add(label07);
-        audio.add(label08);
-        audio.add(label09);
-        audio.add(label10);
-        audio.add(label11);
-        audio.add(label12);
-        audio.add(text01);
-        audio.add(combobox02);
-        audio.add(text03);
-        audio.add(text04);
-        audio.add(text05);
-        audio.add(text06);
-        audio.add(text07);
-        audio.add(text08);
-        audio.add(radio09);
-        audio.add(radio09f);
-        group1.add(radio09);
+
+        label14.setBounds(10, 335, 160, 20);
+		setting.add(label14);
+
+		text11 = new JTextField();
+		text11.setText(ContentTypeIni);
+		text11.setBounds(180, 335, 160, 20);
+		setting.add(text11);
+
+		label15.setBounds(10, 360, 160, 20);
+		setting.add(label15);
+
+		text12 = new JTextField();
+		text12.setText(ContentLengthIni);
+		text12.setBounds(180, 360, 160, 20);
+		setting.add(text12);
+
+		btnGet.addActionListener(this);
+		btnDefault.addActionListener(this);
+		btnClear.addActionListener(this);
+		btnSave.addActionListener(this);
+
+		group1.add(radio09);
         group1.add(radio09f);
-        audio.add(radio10);
-        audio.add(radio10f);
         group2.add(radio10);
         group2.add(radio10f);
-        audio.add(text11);
-        audio.add(text12);
-        audio.add(button4);
-        audio.add(btnDefaultSub);
-        audio.add(btnClearSub);
-        audio.add(btnSettingSub);
-        button4.addActionListener(this); // 添加事件处理
+	}
 
-        frame.setVisible(true);// 窗口可见
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 使能关闭窗口，结束程序
-        tabPane.add("Main", main);// 添加布局1
-        tabPane.add("Audio", audio);// 添加布局2
-
-    }
-    /**
-     * 时间监听的方法
-     */
-    public void actionPerformed(ActionEvent e) {
-        // 绑定到选择文件，先择文件事件
-    	try {
-    		if (e.getSource().equals(button2)) {
+	public void actionPerformed(ActionEvent e) {
+		try {
+    		if (e.getSource().equals(btnGet)) {
     			jfc.setFileSelectionMode(1);// 设定只能选择到文件
     			int state = jfc.showOpenDialog(null);// 此句是打开文件选择器界面的触发语句
     			if (state == 1) {
@@ -281,7 +293,7 @@ public class MainMenu implements ActionListener {
     				text2.setText(f.getAbsolutePath());
     			}
     		}
-    		if (e.getSource().equals(button3)||e.getSource().equals(button4)) {
+    		if (e.getSource().equals(btnSave)) {
     			// 弹出对话框可以改变里面的参数具体得靠大家自己去看，时间很短
     			String txt;
     			String grammar = text1.getText();
@@ -392,23 +404,11 @@ public class MainMenu implements ActionListener {
     				JOptionPane.showMessageDialog(null, empty, "message", 2);
     				return;
     			}
-    			if(FileFinder2.checkMu(fileExt, audioPath)){
-    				JOptionPane.showMessageDialog(null, "指定路径下不存在'*" + fileExt + "'文件", "message", 2);
-    				return;
-    			}
-    			String header = TxtRead.readHeader(serverIP, localIP);
-    			String gram = TxtRead.readGram(grammar);
-    			String footer = TxtRead.readFooter(serverIP, localIP);
-    			String audio = FileFinder2.findPath(fileExt, audioPath, map);
-    			txt = header + gram + audio + footer;
-    			TxtWrite.writeTxt(txt);
-    			if (checkBox.isSelected()) {
-    				saveSetting();
-    			}
-    			Callbat.callCmd();
+    			saveSetting();
+    			JOptionPane.showMessageDialog(null, "已保存");
     			return;
     		}
-    		if (e.getSource().equals(btnClear)||e.getSource().equals(btnClearSub)) {
+    		if (e.getSource().equals(btnClear)) {
     			text1.setText("");
     			text2.setText("");
     			text3.setText("");
@@ -424,10 +424,8 @@ public class MainMenu implements ActionListener {
     			radio10.setSelected(true);
     			text11.setText("");
     			text12.setText("");
-    			checkBox.setSelected(false);
-    			checkBoxSub.setSelected(false);
     		}
-    		if (e.getSource().equals(btnDefault)||e.getSource().equals(btnDefaultSub)) {
+    		if (e.getSource().equals(btnDefault)) {
     			File directory = new File("..");
     			String dir = directory.getCanonicalPath();
     			String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
@@ -458,7 +456,6 @@ public class MainMenu implements ActionListener {
     	        text2.setText(location);
     	        text3.setText(ipPortIni);
     	        text01.setText(ChannelIdentifierIni);
-    	        text01.setBounds(180, 10, 160, 20);
     	        if (VendorSpecificParametersIni.equals("Recognition-Mode=hotword")) {
     	        	combobox02.setSelectedIndex(0);
     	        } else if (VendorSpecificParametersIni.equals("Recognition-Mode=normal")) {
@@ -485,33 +482,24 @@ public class MainMenu implements ActionListener {
     	        text11.setText(ContentTypeIni);
     	        text12.setText(ContentLengthIni);
     		}
-    		if (e.getSource().equals(btnSetting)||e.getSource().equals(btnSettingSub)) {
-    			DefaultSettingMenu dialog = new DefaultSettingMenu();
-    			dialog.setVisible(true);
-    		}
-    		if (e.getSource().equals(checkBox)) {
-    			if (checkBox.isSelected()) {
-    				checkBoxSub.setSelected(true);
-    			} else if (!checkBox.isSelected()) {
-    				checkBoxSub.setSelected(false);
-    			}
-    		}
-    		if (e.getSource().equals(checkBoxSub)) {
-    			if (checkBoxSub.isSelected()) {
-    				checkBox.setSelected(true);
-    			} else if (!checkBoxSub.isSelected()) {
-    				checkBox.setSelected(false);
-    			}
-    		}
     	} catch (UnknownHostException e1) {
     		e1.printStackTrace();
     	} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-    }
-    public static void main(String[] args) throws IOException {
-        new MainMenu();
-    }
+	}
+
+	public void setVisible(boolean b) {
+		DefaultSettingMenu.this.frame.setVisible(b);
+	}
+
+	public void setModal(boolean b) {
+		DefaultSettingMenu.this.frame.setModal(b);
+	}
+
+	public void setAlwaysOnTop(boolean b) {
+		DefaultSettingMenu.this.frame.setAlwaysOnTop(b);
+	}
 
     /**
      * 空白检测function
