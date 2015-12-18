@@ -26,6 +26,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+/**
+ * @author Yizina
+ * DefaultSettingMenu.java
+ * 2015/12/17
+ */
+
 public class DefaultSettingMenu implements ActionListener {
 
 	private JDialog frame;

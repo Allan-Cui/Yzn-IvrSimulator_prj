@@ -148,16 +148,5 @@ public final class IniEditer {
 		}
 		return false;
 	}
-	/**
-	 * 程序测试
-	 */
-	public static void main(String[] args) {
-//		//String value = Config.getProfileString("sysconfig.ini", "Option", "OracleDB", "default");
-//		//System.out.println(value);
-//		try {
-//			System.out.println(ConfigurationFile.setProfileString("d:/1.ini", "Settings", "SampSize", "111"));
-//		} catch (IOException e) {
-//			System.out.println(e.toString());
-//		}
-	}
+
 }
