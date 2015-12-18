@@ -20,7 +20,8 @@ public class TxtWrite {
 		try{
 			File directory = new File("..");
 			String dir = directory.getCanonicalPath();
-			writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\result.txt"), "UTF-8")));
+//			writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\result.txt"), "UTF-8")));
+			writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(dir + "\\src\\result.txt"), "UTF-8")));
 			writer.write(txt);
 			writer.close();
 		}catch(IOException e){

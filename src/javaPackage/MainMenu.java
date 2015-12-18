@@ -34,7 +34,8 @@ import javax.swing.JTextField;
 
 public class MainMenu implements ActionListener {
 
-	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+//	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\:\\d{1,5}\\b");
     JFrame frame = new JFrame("IvrSimulator");// 框架布局
     JTabbedPane tabPane = new JTabbedPane();// 选项卡布局
 
@@ -50,10 +51,10 @@ public class MainMenu implements ActionListener {
     JButton button3 = new JButton("Go");//
     JButton btnDefault = new JButton("Default");
     JButton btnClear = new JButton("Clear");
-    JButton btnSetting = new JButton("Setting");
+    JButton btnSetting = new JButton("DefaultSetting");
     JButton btnDefaultSub = new JButton("Default");
     JButton btnClearSub = new JButton("Clear");
-    JButton btnSettingSub = new JButton("Setting");
+    JButton btnSettingSub = new JButton("DefaultSetting");
 
     Container audio = new Container();
     JLabel label01 = new JLabel("Channel-Identifier");
@@ -94,7 +95,8 @@ public class MainMenu implements ActionListener {
 
     	File directory = new File("..");
 		String dir = directory.getCanonicalPath();
-		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+		String locationIni = dir + "\\src\\txt\\defaultValue.ini";
 		IniEditer iniRead = new IniEditer();
 		String grammarIni = iniRead.getProfileString(locationIni, "Main", "Grammar");
 		String audioIni = iniRead.getProfileString(locationIni, "Main", "Audio");
@@ -113,7 +115,8 @@ public class MainMenu implements ActionListener {
 		String ContentLengthIni = iniRead.getProfileString(locationIni, "Audio", "Content-Length");
 		String location;
 		if (audioIni.isEmpty()) {
-			location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+//			location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+			location = dir + "\\src\\mu";
 		} else {
 			location = audioIni;
 		}
@@ -142,7 +145,7 @@ public class MainMenu implements ActionListener {
         button3.addActionListener(this); // 添加事件处理
         btnDefault.setBounds(250, 341, 75, 20);
         btnClear.setBounds(180, 341, 65, 20);
-        btnSetting.setBounds(10, 341, 75, 20);
+        btnSetting.setBounds(10, 341, 120, 20);
         btnDefault.addActionListener(this);
         btnClear.addActionListener(this);
         btnSetting.addActionListener(this);
@@ -216,7 +219,7 @@ public class MainMenu implements ActionListener {
         button4.setBounds(330, 341, 60, 20);
         btnDefaultSub.setBounds(250, 341, 75, 20);
         btnClearSub.setBounds(180, 341, 65, 20);
-        btnSettingSub.setBounds(10, 341, 75, 20);
+        btnSettingSub.setBounds(10, 341, 120, 20);
         btnDefaultSub.addActionListener(this);
         btnClearSub.addActionListener(this);
         btnSettingSub.addActionListener(this);
@@ -430,7 +433,8 @@ public class MainMenu implements ActionListener {
     		if (e.getSource().equals(btnDefault)||e.getSource().equals(btnDefaultSub)) {
     			File directory = new File("..");
     			String dir = directory.getCanonicalPath();
-    			String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//    			String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+    			String locationIni = dir + "\\src\\txt\\defaultValue.ini";
     			IniEditer iniRead = new IniEditer();
     			String grammarIni = iniRead.getProfileString(locationIni, "Main", "Grammar");
     			String audioIni = iniRead.getProfileString(locationIni, "Main", "Audio");
@@ -449,7 +453,8 @@ public class MainMenu implements ActionListener {
     			String ContentLengthIni = iniRead.getProfileString(locationIni, "Audio", "Content-Length");
     			String location;
     			if (audioIni.isEmpty()) {
-    				location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+//    				location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+    				location = dir + "\\src\\mu";
     			} else {
     				location = audioIni;
     			}
@@ -527,7 +532,8 @@ public class MainMenu implements ActionListener {
     private void saveSetting() throws IOException{
     	File directory = new File("..");
 		String dir = directory.getCanonicalPath();
-		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+		String locationIni = dir + "\\src\\txt\\defaultValue.ini";
     	IniEditer iniWrite = new IniEditer();
     	iniWrite.setProfileString(locationIni, "Main", "Grammar", text1.getText());
 		iniWrite.setProfileString(locationIni, "Main", "Audio", text2.getText());

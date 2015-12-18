@@ -1,10 +1,10 @@
-----tcp_open $$$SERVERIP$$$:571
+----tcp_open $$$SERVERIP$$$
 --------------------------------------------------------------------------
-INVITE sip:$$$SERVERIP$$$:571 SIP/2.0
+INVITE sip:$$$SERVERIP$$$ SIP/2.0
 Via: SIP/2.0 $$$LOCALIP$$$:8062;rport;branch=z9hG4bK596ZZv9tXa1ra
 Max-Forwards: 70
 From: <sip:$$$LOCALIP$$$:8062>;tag=5KyB0Np8NtaFB
-To: <sip:$$$SERVERIP$$$:571>
+To: <sip:$$$SERVERIP$$$>
 Call-ID: 50cd2080-9996-122d-2680-39a48cb53b8d
 CSeq: 127262509 INVITE
 Contact: <sip:$$$LOCALIP$$$:8062>
@@ -38,11 +38,11 @@ a=mid:1
 --------------------------------------------------------------------------
 ----tcp_send
 --------------------------------------------------------------------------
-ACK sip:$$$SERVERIP$$$:571;transport=TCP SIP/2.0
+ACK sip:$$$SERVERIP$$$;transport=TCP SIP/2.0
 Via: SIP/2.0 $$$LOCALIP$$$:8062;rport;branch=z9hG4bK6j0r1QtytKQBp
 Max-Forwards: 70
 From: <sip:$$$LOCALIP$$$:8062>;tag=5KyB0Np8NtaFB
-To: <sip:$$$SERVERIP$$$:571>;tag=d8074a18
+To: <sip:$$$SERVERIP$$$>;tag=d8074a18
 Call-ID: 50cd2080-9996-122d-2680-39a48cb53b8d
 CSeq: 127262509 ACK
 Contact: <sip:$$$LOCALIP$$$:8062>

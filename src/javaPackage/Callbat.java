@@ -16,8 +16,9 @@ public class Callbat {
 		try {
 			File directory = new File("..");
 			String dir = directory.getCanonicalPath();
-			String locationCmd = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\test.bat";
+//			String locationCmd = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\test.bat";
 //			String locationCmd = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\go.bat";
+			String locationCmd = dir + "\\src\\go.bat";
 			Process child = Runtime.getRuntime().exec("cmd.exe /C start "+locationCmd);
 			InputStream in = child.getInputStream();
 			while ((in.read()) != -1) {

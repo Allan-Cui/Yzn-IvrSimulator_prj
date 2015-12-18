@@ -43,7 +43,8 @@ public class DefaultSettingMenu implements ActionListener {
 	private JTextField text12;
 	JFileChooser jfc = new JFileChooser();// 文件选择器
 
-	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+//	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+	Pattern pattern = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\:\\d{1,5}\\b");
 
 	Container setting = new Container();
 	JLabel label01 = new JLabel("Grammar");
@@ -82,10 +83,11 @@ public class DefaultSettingMenu implements ActionListener {
 	 */
 	DefaultSettingMenu() throws IOException {
 		frame = new JDialog();
-
+		DefaultSettingMenu.this.frame.setModal(true);
 		File directory = new File("..");
 		String dir = directory.getCanonicalPath();
-		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+		String locationIni = dir + "\\src\\txt\\defaultValue.ini";
 		IniEditer iniRead = new IniEditer();
 		String grammarIni = iniRead.getProfileString(locationIni, "Main", "Grammar");
 		String audioIni = iniRead.getProfileString(locationIni, "Main", "Audio");
@@ -104,7 +106,8 @@ public class DefaultSettingMenu implements ActionListener {
 		String ContentLengthIni = iniRead.getProfileString(locationIni, "Audio", "Content-Length");
 		String location;
 		if (audioIni.isEmpty()) {
-			location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+//			location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+			location = dir + "\\src\\mu";
 		} else {
 			location = audioIni;
 		}
@@ -428,7 +431,8 @@ public class DefaultSettingMenu implements ActionListener {
     		if (e.getSource().equals(btnDefault)) {
     			File directory = new File("..");
     			String dir = directory.getCanonicalPath();
-    			String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//    			String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+    			String locationIni = dir + "\\src\\txt\\defaultValue.ini";
     			IniEditer iniRead = new IniEditer();
     			String grammarIni = iniRead.getProfileString(locationIni, "Main", "Grammar");
     			String audioIni = iniRead.getProfileString(locationIni, "Main", "Audio");
@@ -447,7 +451,8 @@ public class DefaultSettingMenu implements ActionListener {
     			String ContentLengthIni = iniRead.getProfileString(locationIni, "Audio", "Content-Length");
     			String location;
     			if (audioIni.isEmpty()) {
-    				location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+//    				location = dir + "\\Yzn-IvrSimulator_prj\\src\\mu";
+    				location = dir + "\\src\\mu";
     			} else {
     				location = audioIni;
     			}
@@ -489,18 +494,6 @@ public class DefaultSettingMenu implements ActionListener {
 		}
 	}
 
-	public void setVisible(boolean b) {
-		DefaultSettingMenu.this.frame.setVisible(b);
-	}
-
-	public void setModal(boolean b) {
-		DefaultSettingMenu.this.frame.setModal(b);
-	}
-
-	public void setAlwaysOnTop(boolean b) {
-		DefaultSettingMenu.this.frame.setAlwaysOnTop(b);
-	}
-
     /**
      * 空白检测function
      * @param obj
@@ -515,7 +508,8 @@ public class DefaultSettingMenu implements ActionListener {
     private void saveSetting() throws IOException{
     	File directory = new File("..");
 		String dir = directory.getCanonicalPath();
-		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+//		String locationIni = dir + "\\Yzn-IvrSimulator_prj\\src\\resource\\defaultValue.ini";
+		String locationIni = dir + "\\src\\txt\\defaultValue.ini";
     	IniEditer iniWrite = new IniEditer();
     	iniWrite.setProfileString(locationIni, "Main", "Grammar", text1.getText());
 		iniWrite.setProfileString(locationIni, "Main", "Audio", text2.getText());
@@ -553,4 +547,13 @@ public class DefaultSettingMenu implements ActionListener {
 		iniWrite.setProfileString(locationIni, "Audio", "Content-Type", text11.getText());
 		iniWrite.setProfileString(locationIni, "Audio", "Content-Length", text12.getText());
     }
+
+	public void setVisible(boolean b) {
+		DefaultSettingMenu.this.frame.setVisible(b);
+	}
+
+	public void setModal(boolean b) {
+		DefaultSettingMenu.this.frame.setModal(b);
+	}
+
 }

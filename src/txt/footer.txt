@@ -1,8 +1,8 @@
-BYE sip:$$$SERVERIP$$$:571;transport=TCP SIP/2.0
+BYE sip:$$$SERVERIP$$$;transport=TCP SIP/2.0
 Via: SIP/2.0 $$$LOCALIP$$$:8062;rport;branch=z9hG4bK9Dc368c9Het3r
 Max-Forwards: 70
 From: <sip:$$$LOCALIP$$$:8062>;tag=5KyB0Np8NtaFB
-To: <sip:$$$SERVERIP$$$:571>;tag=d8074a18
+To: <sip:$$$SERVERIP$$$>;tag=d8074a18
 Call-ID: 50cd2080-9996-122d-2680-39a48cb53b8d
 CSeq: 127262511 BYE
 Contact: <sip:$$$LOCALIP$$$:8062>

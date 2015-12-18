@@ -26,7 +26,8 @@ public class TxtRead {
 	private static String path(String str) throws IOException {
 		File directory = new File("..");
 		String dir = directory.getCanonicalPath();
-		String path = "\\Yzn-IvrSimulator_prj\\src\\txt";
+//		String path = "\\Yzn-IvrSimulator_prj\\src\\txt";
+		String path = "\\src\\txt";
 		return dir + path + str;
 	}
 	private static String headerTxt = "\\header.txt";
